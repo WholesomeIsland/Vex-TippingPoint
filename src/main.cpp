@@ -1,5 +1,8 @@
 #include "main.h"
-
+void vis_routine(){
+	pros::Vision vis(5);
+	
+}
 /**
  * A callback function for LLEMU's center button.
  *
@@ -74,12 +77,17 @@ void autonomous() {}
 
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+<<<<<<< HEAD
 	pros::Motor bleft_mtr(10);
 	pros::Motor bright_mtr(1);
 	pros::Motor fleft_mtr(20);
 	pros::Motor fright_mtr(11);
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
+=======
+	pros::Motor left_mtr(1);
+	pros::Motor right_mtr(11);
+>>>>>>> 75dc451ecf5b822813efadfb7ec2b11a1c893e57
 	while (true) {
 		pros::lcd::print(0, "%d %d", master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
 		int left = -master.get_analog(ANALOG_LEFT_Y);
