@@ -23,7 +23,6 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
 }
@@ -75,9 +74,11 @@ void autonomous() {}
 
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(20);
-	pros::Motor right_mtr(10);
-	pros::Motor llift(15);
+	pros::Motor bleft_mtr(10);
+	pros::Motor bright_mtr(1);
+	pros::Motor fleft_mtr(20);
+	pros::Motor fright_mtr(11);
+	pros::Motor llift(6);
 	pros::Motor rlift(5);
 	while (true) {
 		pros::lcd::print(0, "%d %d", master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
@@ -85,10 +86,10 @@ void opcontrol() {
 		int right = master.get_analog(ANALOG_RIGHT_Y);
 		int up = 50 * master.get_digital(DIGITAL_A);
 		int down = 50 * master.get_digital(DIGITAL_B);
-
-
-		left_mtr = left;
-		right_mtr = right;
+		fright_mtr = right;
+		fleft_mtr = left;
+		bleft_mtr = left;
+		bright_mtr = right;
 		if(up > 0) {
 			llift = up;
 			rlift = up;
