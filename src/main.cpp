@@ -1,8 +1,6 @@
 #include "main.h"
-void vis_routine(){
-	pros::Vision vis(5);
-	
-}
+#include "pros/rtos.hpp"
+
 /**
  * A callback function for LLEMU's center button.
  *
@@ -59,7 +57,28 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	pros::Motor bleft_mtr(10);
+	pros::Motor bright_mtr(1);
+	pros::Motor fleft_mtr(20);
+	pros::Motor fright_mtr(11);
+	pros::Motor llift(6);
+	pros::Motor rlift(5);
+	bleft_mtr = 50;
+	bright_mtr = -50;
+	fleft_mtr = 50;
+	fright_mtr = -50;
+	pros::delay(1000);
+	bleft_mtr = 0;
+	bright_mtr = 0;
+	fleft_mtr = 0;
+	fright_mtr = 0;
+	llift = -50;
+	rlift = 50;
+	pros::delay(500);
+	llift = 0;
+	rlift = 0;	
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -84,26 +103,23 @@ void opcontrol() {
 	pros::Motor fright_mtr(11);
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
-
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(11);
 	while (true) {
 		pros::lcd::print(0, "%d %d", master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
-		int left = -master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
-		int up = 50 * master.get_digital(DIGITAL_A);
-		int down = 50 * master.get_digital(DIGITAL_B);
+		int left = master.get_analog(ANALOG_LEFT_Y);
+		int right = -master.get_analog(ANALOG_RIGHT_Y);
+		int up = 75 * master.get_digital(DIGITAL_A);
+		int down = 75 * master.get_digital(DIGITAL_B);
 		fright_mtr = right;
 		fleft_mtr = left;
 		bleft_mtr = left;
 		bright_mtr = right;
-		if(up > 0) {
-			llift = up;
+		if(up > 0 && down == 0) {
+			llift = -up;
 			rlift = up;
 		}
-		else if (down < 0){
+		else if (down > 0 && up == 0){
 		llift = down;
-		rlift = down;
+		rlift = -down;
 		}
 		else {llift = 0; rlift = 0;}
 		pros::delay(20);
