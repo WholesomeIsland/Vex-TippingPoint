@@ -1,5 +1,5 @@
-#include "main.h"
-#include "pros/rtos.hpp"
+#include "../include/main.h"
+#include "../include/pros/rtos.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -64,11 +64,11 @@ void autonomous() {
 	pros::Motor fright_mtr(11);
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
-	bleft_mtr = 50;
-	bright_mtr = -50;
-	fleft_mtr = 50;
-	fright_mtr = -50;
-	pros::delay(1000);
+	bleft_mtr = 100;
+	bright_mtr = -100;
+	fleft_mtr = 100;
+	fright_mtr = -100;
+	pros::delay(2000);
 	bleft_mtr = 0;
 	bright_mtr = 0;
 	fleft_mtr = 0;
@@ -76,8 +76,17 @@ void autonomous() {
 	llift = -50;
 	rlift = 50;
 	pros::delay(500);
+	bleft_mtr = -100;
+	bright_mtr = 100;
+	fleft_mtr = -100;
+	fright_mtr = 100;
+	pros::delay(2000);
 	llift = 0;
-	rlift = 0;	
+	rlift = 0;
+	bleft_mtr = 0;
+	bright_mtr = 0;
+	fleft_mtr = 0;
+	fright_mtr = 0;
 }
 
 /**
@@ -103,6 +112,7 @@ void opcontrol() {
 	pros::Motor fright_mtr(11);
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
+  pros::Motor Ringlift(7);
 	while (true) {
 		pros::lcd::print(0, "%d %d", master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
 		int left = master.get_analog(ANALOG_LEFT_Y);
@@ -122,6 +132,12 @@ void opcontrol() {
 		rlift = -down;
 		}
 		else {llift = 0; rlift = 0;}
+    if(master.get_digital(DIGITAL_R1)){
+    Ringlift = -200;
+    }
+    else {
+    Ringlift = 0;
+    }
 		pros::delay(20);
 	}
 }
