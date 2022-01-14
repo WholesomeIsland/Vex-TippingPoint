@@ -1,5 +1,5 @@
-#include "../include/main.h"
-#include "../include/pros/rtos.hpp"
+#include "main.h"
+#include "pros/rtos.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -135,9 +135,10 @@ void opcontrol() {
     if(master.get_digital(DIGITAL_R1)){
     Ringlift = -200;
     }
-    else {
-    Ringlift = 0;
+    else if (master.get_digital(DIGITAL_R2)){
+    Ringlift = -050;
     }
+		else{Pinglift = 0;}
 		pros::delay(20);
 	}
 }
