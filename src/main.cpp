@@ -113,6 +113,7 @@ void opcontrol() {
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
   pros::Motor Ringlift(7);
+	pros::Motor BackLift(15);
 	while (true) {
 		pros::lcd::print(0, "%d %d", master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
 		int left = master.get_analog(ANALOG_LEFT_Y);
@@ -133,12 +134,22 @@ void opcontrol() {
 		}
 		else {llift = 0; rlift = 0;}
     if(master.get_digital(DIGITAL_R1)){
-    Ringlift = -200;
+    Ringlift = -128;
     }
     else if (master.get_digital(DIGITAL_R2)){
-    Ringlift = -100;
+    Ringlift = -64;
     }
 		else{Ringlift = 0;}
+		if(master.get_digital(DIGITAL_L1)){
+			BackLift = 100;
+			pros::delay(500);
+			BackLift = 0;
+		}
+		else if (master.get_digital(DIGITAL_L2)){
+			BackLift = -100;
+			pros::delay(500);
+			BackLift = 0;
+		}
 		pros::delay(20);
 	}
 }
