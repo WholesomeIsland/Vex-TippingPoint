@@ -138,7 +138,7 @@ void opcontrol() {
     else if (master.get_digital(DIGITAL_R2)){
     Ringlift = -050;
     }
-		else{Pinglift = 0;}
+		else{Ringlift = 0;}
 		pros::delay(20);
 	}
 }
