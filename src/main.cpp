@@ -134,10 +134,10 @@ void opcontrol() {
     }
 		else{Ringlift = 0;}
 		if(master.get_digital(DIGITAL_L1)){
-			BackLift = -100;
+			BackLift = -75;
 		}
 		else if (master.get_digital(DIGITAL_L2)){
-			BackLift = 100;
+			BackLift = 75;
 		}
 		else{BackLift = 0;}
 		pros::delay(20);
