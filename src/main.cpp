@@ -64,28 +64,15 @@ void autonomous() {
 	pros::Motor fright_mtr(11);
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
+	pros::Motor BackLift(15);
 	bleft_mtr = 100;
-	bright_mtr = -100;
 	fleft_mtr = 100;
+	bright_mtr = -100;
 	fright_mtr = -100;
-	pros::delay(2000);
+	pros::delay(1000);
 	bleft_mtr = 0;
-	bright_mtr = 0;
 	fleft_mtr = 0;
-	fright_mtr = 0;
-	llift = -50;
-	rlift = 50;
-	pros::delay(500);
-	bleft_mtr = -100;
-	bright_mtr = 100;
-	fleft_mtr = -100;
-	fright_mtr = 100;
-	pros::delay(2000);
-	llift = 0;
-	rlift = 0;
-	bleft_mtr = 0;
 	bright_mtr = 0;
-	fleft_mtr = 0;
 	fright_mtr = 0;
 }
 
@@ -114,6 +101,9 @@ void opcontrol() {
 	pros::Motor rlift(5);
   pros::Motor Ringlift(7);
 	pros::Motor BackLift(15);
+	BackLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	llift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	rlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	while (true) {
 		pros::lcd::print(0, "%d %d", master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
 		int left = master.get_analog(ANALOG_LEFT_Y);
