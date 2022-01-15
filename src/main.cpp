@@ -65,6 +65,9 @@ void autonomous() {
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
 	pros::Motor BackLift(15);
+	BackLift = 100;
+	pros::delay(500);
+	BackLift = 0;
 	bleft_mtr = 100;
 	fleft_mtr = 100;
 	bright_mtr = -100;
@@ -131,15 +134,12 @@ void opcontrol() {
     }
 		else{Ringlift = 0;}
 		if(master.get_digital(DIGITAL_L1)){
-			BackLift = 100;
-			pros::delay(500);
-			BackLift = 0;
+			BackLift = -100;
 		}
 		else if (master.get_digital(DIGITAL_L2)){
-			BackLift = -100;
-			pros::delay(500);
-			BackLift = 0;
+			BackLift = 100;
 		}
+		else{BackLift = 0;}
 		pros::delay(20);
 	}
 }
