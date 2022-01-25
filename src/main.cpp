@@ -58,13 +58,14 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	pros::Motor bleft_mtr(10);
-	pros::Motor bright_mtr(1);
-	pros::Motor fleft_mtr(20);
-	pros::Motor fright_mtr(11);
+  pros::Motor bleft_mtr(10);
+	pros::Motor bright_mtr(18);
+	pros::Motor fleft_mtr(9);
+	pros::Motor fright_mtr(8);
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
-	pros::Motor BackLift(15);
+  pros::Motor Ringlift(7);
+	pros::Motor BackLift(4);
 	BackLift = 100;
 	pros::delay(500);
 	BackLift = 0;
@@ -97,13 +98,13 @@ void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 	pros::Motor bleft_mtr(10);
-	pros::Motor bright_mtr(1);
-	pros::Motor fleft_mtr(20);
-	pros::Motor fright_mtr(11);
+	pros::Motor bright_mtr(18);
+	pros::Motor fleft_mtr(9);
+	pros::Motor fright_mtr(8);
 	pros::Motor llift(6);
 	pros::Motor rlift(5);
   pros::Motor Ringlift(7);
-	pros::Motor BackLift(15);
+	pros::Motor BackLift(4);
 	BackLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	llift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	rlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
