@@ -57,6 +57,7 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
 void autonomous() {
   pros::Motor bleft_mtr(10);
 	pros::Motor bright_mtr(18);
@@ -66,18 +67,70 @@ void autonomous() {
 	pros::Motor rlift(5);
   pros::Motor Ringlift(7);
 	pros::Motor BackLift(4);
-	BackLift = 100;
+BackLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+llift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+rlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+#ifndef LEFT
+	BackLift = 128;
 	pros::delay(500);
 	BackLift = 0;
-	bleft_mtr = 100;
-	fleft_mtr = 100;
-	bright_mtr = -100;
-	fright_mtr = -100;
+	bleft_mtr = -100;
+	fleft_mtr = -100;
+	bright_mtr = 100;
+	fright_mtr = 100;
 	pros::delay(1000);
 	bleft_mtr = 0;
 	fleft_mtr = 0;
 	bright_mtr = 0;
 	fright_mtr = 0;
+	BackLift = -128;
+	pros::delay(1000);
+	BackLift = 0;
+	bleft_mtr = 100;
+	fleft_mtr = 100;
+	bright_mtr = -100;
+	fright_mtr = -100;
+	pros::delay(500);
+	bleft_mtr = 0;
+	fleft_mtr = 0;
+	bright_mtr = 0;
+	fright_mtr = 0;
+	#endif
+	#ifdef LEFT
+	bleft_mtr = 100;
+	fleft_mtr = 100;
+	bright_mtr = -100;
+	fright_mtr = -100;
+	pros::delay(1000);
+	bleft_mtr = -100;
+	fleft_mtr = -100;
+	bright_mtr = 100;
+	fright_mtr = 100;
+	pros::delay(250);
+	bleft_mtr = 100;
+	fleft_mtr = 100;
+	bright_mtr = -100;
+	fright_mtr = -100;
+	pros::delay(2000);
+	llift = 100;
+	rlift = -100;
+	bleft_mtr = 0;
+	fleft_mtr = 0;
+	bright_mtr = 0;
+	fright_mtr = 0;
+	pros::delay(1000);
+	llift = 0;
+	rlift = 0;
+	bleft_mtr = -100;
+	fleft_mtr = -100;
+	bright_mtr = 100;
+	fright_mtr = 100;
+	pros::delay(1500);
+	bleft_mtr = 0;
+	fleft_mtr = 0;
+	bright_mtr = 0;
+	fright_mtr = 0;
+	#endif
 }
 
 /**
