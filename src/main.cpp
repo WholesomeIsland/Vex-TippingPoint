@@ -57,7 +57,6 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-
 void autonomous() {
   pros::Motor bleft_mtr(10);
 	pros::Motor bright_mtr(18);
@@ -163,14 +162,14 @@ void opcontrol() {
 	rlift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	while (true) {
 		pros::lcd::print(0, "%d %d", master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = -master.get_analog(ANALOG_RIGHT_Y);
+		int turn = master.get_analog(ANALOG_LEFT_Y);
+		int power = -master.get_analog(ANALOG_RIGHT_Y);
 		int up = 75 * master.get_digital(DIGITAL_A);
 		int down = 75 * master.get_digital(DIGITAL_B);
-		fright_mtr = right;
-		fleft_mtr = left;
-		bleft_mtr = left;
-		bright_mtr = right;
+		fright_mtr = power;
+		fleft_mtr = turn;
+		bleft_mtr = turn;
+		bright_mtr = power;
 		if(up > 0 && down == 0) {
 			llift = -up;
 			rlift = up;
